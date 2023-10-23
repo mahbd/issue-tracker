@@ -34,6 +34,18 @@ const IssueForm = ({ issue }: Props) => {
   });
   const [error, setError] = useState("");
   const router = useRouter();
+
+  const onSubmit = async (data: IssueFormData) => {
+    try {
+      if (issue) await axios.patch(`/api/issues/${issue.id}`, data);
+      else await axios.post("/api/issues", data);
+      router.push("/issues");
+      router.refresh();
+    } catch (error) {
+      setError("Something went wrong");
+    }
+  };
+
   return (
     <div className="max-w-xl">
       {error && (
@@ -41,17 +53,7 @@ const IssueForm = ({ issue }: Props) => {
           <Callout.Text>{error}</Callout.Text>
         </Callout.Root>
       )}
-      <form
-        className="space-y-3"
-        onSubmit={handleSubmit(async (data) => {
-          try {
-            await axios.post("/api/issues", data);
-            router.push("/issues");
-          } catch (error) {
-            setError("Something went wrong");
-          }
-        })}
-      >
+      <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
         <TextField.Root>
           <TextField.Input
             defaultValue={issue?.title}
@@ -70,7 +72,7 @@ const IssueForm = ({ issue }: Props) => {
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <Button type="submit" disabled={isSubmitting}>
-          Submit {isSubmitting && <Spinner />}
+          {issue ? "Update issue " : "Submit "} {isSubmitting && <Spinner />}
         </Button>
       </form>
     </div>
