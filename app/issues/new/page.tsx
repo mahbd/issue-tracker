@@ -1,7 +1,6 @@
 "use client";
 
-import ErrorMessage from "@/app/component/ErrorMessage";
-import Spinner from "@/app/component/Spinner";
+import { Spinner, ErrorMessage } from "@/app/components";
 import { createIssueSchema } from "@/app/validationSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Callout, TextField } from "@radix-ui/themes";
