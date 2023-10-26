@@ -5,7 +5,6 @@ import { Select } from "@radix-ui/themes";
 import { useQuery } from "@tanstack/react-query";
 import Skeleton from "../../components/Skeleton";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
 
 const AssigneeSelect = () => {
   const {
