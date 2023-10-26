@@ -7,6 +7,7 @@ import DeleteIssueButton from "./DeleteIssueButton";
 import { Flex } from "@radix-ui/themes";
 import { getServerSession } from "next-auth";
 import authOptions from "@/app/auth/authOptions";
+import AssigneeSelect from "./AssigneeSelect";
 
 interface Props {
   params: { id: string };
@@ -33,6 +34,7 @@ const IssueDetailsPage = async ({ params: { id } }: Props) => {
       {session && (
         <Box>
           <Flex direction={"column"} gap="3">
+            <AssigneeSelect />
             <EditIssueButton issueId={issue.id} />
             <DeleteIssueButton issueId={issue.id} />
           </Flex>
