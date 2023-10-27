@@ -20,9 +20,13 @@ const IssuesPage = async ({ searchParams }: Props) => {
   const status = Object.values(Status).includes(searchParams.status)
     ? searchParams.status
     : undefined;
+
   const issues = await prisma.issue.findMany({
     where: {
       status: status,
+    },
+    orderBy: {
+      [searchParams.orderBy || "createdAt"]: "asc",
     },
   });
   return (
