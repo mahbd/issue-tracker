@@ -24,3 +24,12 @@ export async function POST(request: NextRequest) {
   });
   return NextResponse.json(issue);
 }
+
+export async function GET(request: NextRequest) {
+  const issues = await prisma.issue.findMany({
+    orderBy: {
+      title: "asc",
+    },
+  });
+  return NextResponse.json(issues);
+}
