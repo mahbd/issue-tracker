@@ -33,7 +33,7 @@ export async function PATCH(
 
   const issue = await prisma.issue.findUnique({
     where: {
-      id: Number(params.id),
+      id: params.id,
     },
   });
   if (!issue) {
@@ -41,7 +41,7 @@ export async function PATCH(
   }
   const updatedIssue = await prisma.issue.update({
     where: {
-      id: Number(params.id),
+      id: params.id,
     },
     data: {
       title,
@@ -62,7 +62,7 @@ export async function DELETE(
   }
   const issue = await prisma.issue.findUnique({
     where: {
-      id: parseInt(params.id),
+      id: params.id,
     },
   });
   if (!issue) {
@@ -82,7 +82,7 @@ export async function GET(
 ) {
   const issue = await prisma.issue.findUnique({
     where: {
-      id: parseInt(params.id),
+      id: params.id,
     },
   });
   return NextResponse.json(issue);

@@ -20,7 +20,7 @@ const IssueDetailsPage = async ({ params: { id } }: Props) => {
 
   const issue = await prisma.issue.findUnique({
     where: {
-      id: parseInt(id),
+      id: id,
     },
   });
 
